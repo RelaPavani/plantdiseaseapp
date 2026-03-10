@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Plant Health Analysis</title>
+    <!-- Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f5f5f5;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 500px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #2e7d32;
+        }
+
+        button {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #1b5e20;
+        }
+
+        canvas {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Upload Excel File 📊</h2>
+
+    <!-- File Upload Form -->
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <br><br>
+        <button type="submit">Upload & Analyze</button>
+    </form>
+
+    <!-- Display Summary & Charts -->
+    {% if total is defined %}
+        <h3>Prediction Summary 🌱</h3>
+        <p><b>Total Plants:</b> {{ total }}</p>
+        <p><b>Healthy Plants:</b> {{ healthy }} ({{ healthy_percent }}%)</p>
+        <p><b>Diseased Plants:</b> {{ diseased }} ({{ diseased_percent }}%)</p>
+
+        <!-- Pie Chart -->
+        <canvas id="pieChart" width="300" height="300"></canvas>
+
+        <!-- Bar Chart -->
+        <canvas id="barChart" width="400" height="300"></canvas>
+
+        <script>
+            // Pass Jinja variables to JS safely
+            const healthy = {{ healthy | tojson }};
+            const diseased = {{ diseased | tojson }};
+
+            // PIE CHART
+            new Chart(document.getElementById("pieChart"), {
+                type: "pie",
+                data: {
+                    labels: ["Healthy Plants", "Diseased Plants"],
+                    datasets: [{
+                        data: [healthy, diseased],
+                        backgroundColor: ['#2e7d32', '#c62828']
+                    }]
+                }
+            });
+
+            // BAR CHART
+            new Chart(document.getElementById("barChart"), {
+                type: "bar",
+                data: {
+                    labels: ["Healthy Plants", "Diseased Plants"],
+                    datasets: [{
+                        label: "Plant Count",
+                        data: [healthy, diseased],
+                        backgroundColor: ['#2e7d32', '#c62828']
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            precision: 0
+                        }
+                    }
+                }
+            });
+        </script>
+    {% endif %}
+</div>
+
+</body>
+</html>

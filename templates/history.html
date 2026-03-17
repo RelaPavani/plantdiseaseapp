@@ -1,11 +1,9 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
 <h2>Prediction History</h2>
 
 <canvas id="chart" width="400" height="150"></canvas>
-
 <script>
 const healthy = Number("{{ healthy_count }}");
 const diseased = Number("{{ diseased_count }}");
@@ -14,19 +12,20 @@ new Chart(document.getElementById('chart'), {
     type: 'bar',
     data: {
         labels: ['Healthy', 'Diseased'],
-        datasets: [{
-            label: 'Predictions',
-            data: [healthy, diseased]
-        }]
+        datasets: [{ label: 'Predictions', data: [healthy, diseased] }]
     }
 });
 </script>
 
 <br>
-
 <table border="1" cellpadding="10">
 <tr>
     <th>Time</th>
+    <th>Temperature</th>
+    <th>Humidity</th>
+    <th>Moisture</th>
+    <th>pH</th>
+    <th>Light</th>
     <th>Prediction</th>
     <th>Confidence</th>
 </tr>
@@ -34,10 +33,14 @@ new Chart(document.getElementById('chart'), {
 {% for r in records %}
 <tr>
     <td>{{ r.timestamp }}</td>
+    <td>{{ r.temperature }}</td>
+    <td>{{ r.humidity }}</td>
+    <td>{{ r.moisture }}</td>
+    <td>{{ r.ph }}</td>
+    <td>{{ r.light }}</td>
     <td>{{ r.result }}</td>
     <td>{{ r.confidence }}%</td>
 </tr>
 {% endfor %}
 </table>
-
 {% endblock %}

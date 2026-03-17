@@ -2,7 +2,6 @@
 <html>
 <head>
     <title>Plant Disease System</title>
-
     <style>
         body {
             margin: 0;
@@ -10,7 +9,6 @@
             display: flex;
             background: #f4f6f8;
         }
-
         .sidebar {
             width: 220px;
             background: #1e293b;
@@ -19,12 +17,10 @@
             padding-top: 20px;
             position: fixed;
         }
-
         .sidebar h2 {
             text-align: center;
             margin-bottom: 30px;
         }
-
         .sidebar a {
             display: block;
             color: white;
@@ -33,56 +29,21 @@
             margin: 5px 10px;
             border-radius: 6px;
         }
-
-        .sidebar a:hover {
-            background: #334155;
-        }
-
-        .content {
-            margin-left: 240px;
-            padding: 20px;
-            width: 100%;
-        }
-
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-            width: 400px;
-        }
-
-        input {
-            width: 95%;
-            padding: 8px;
-            margin: 5px 0;
-        }
-
-        button {
-            padding: 10px 20px;
-            background: green;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
+        .sidebar a:hover { background: #334155; }
+        .content { margin-left: 240px; padding: 20px; width: 100%; }
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1); width: 400px; }
+        input { width: 95%; padding: 8px; margin: 5px 0; }
+        button { padding: 10px 20px; background: green; color: white; border: none; cursor: pointer; }
     </style>
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-
 <body>
-
     <div class="sidebar">
         <h2>🌱 Plant System</h2>
-
         <a href="/">🏠 Prediction</a>
         <a href="/history">📜 History</a>
         <a href="/upload">📊 Excel Upload</a>
     </div>
-
-    <div class="content">
-        {% block content %}{% endblock %}
-    </div>
-
+    <div class="content">{% block content %}{% endblock %}</div>
 </body>
 </html>

@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 
 {% block content %}
-
 <h2>Prediction Dashboard</h2>
 
 <div class="card">
@@ -11,7 +10,6 @@
         <input name="moisture" placeholder="Moisture" required>
         <input name="ph" placeholder="pH" required>
         <input name="light" placeholder="Light Hours" required>
-
         <button type="submit">Predict</button>
     </form>
 
@@ -21,5 +19,4 @@
         <h4>Confidence: {{ confidence }}%</h4>
     {% endif %}
 </div>
-
 {% endblock %}
